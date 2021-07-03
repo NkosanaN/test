@@ -15,7 +15,7 @@ namespace MovieApiV2Web1.Areas.Cars
             return View();
         }
 
-        // GET: Car/Details/5
+        // GET: Car/Details/5 
         public ActionResult Details(int id)
         {      
             return View();

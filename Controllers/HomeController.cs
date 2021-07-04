@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieApiV2Web1.Models;
+using MovieApiV.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +13,17 @@ namespace MovieApiV2Web1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataHandler dataHandler;
+        public HomeController(ILogger<HomeController> logger, DataHandler handler)
         {
             _logger = logger;
+            dataHandler = handler;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var r = await dataHandler.CarListGet();
+            return View(r);
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MovieApiV.Model.Car>
+@{
+    ViewData["Title"] = "Car Inventory";
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+}
+
+<h1>Car List</h1>
+
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4" style="border:2px solid black">
+            <div style="text-align: center; border-bottom: 2px solid black">
+                <h3>@item.Model</h3>
+            </div>
+            <div>
+                <div class="col-md-8">
+                    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg?crop=1xw:0.9997727789138833xh;center,top&resize=480:*" width="150px" height="150px" />
+                </div>
+                <div class="col-md-4" style="text-align: left;">
+                    <b>@item.Make</b>
+                </div>
+            </div>
+
+            <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
+                <b>@item.Price</b>
+            </div>
+
+            <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px"> 
+                <input type="button" value="Add to Cart" />
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,10 @@
+C:\Users\Nkosana\source\repos\SP\bin\Debug\SP.dacpac
+C:\Users\Nkosana\source\repos\SP\bin\Debug\SP.dll
+C:\Users\Nkosana\source\repos\SP\bin\Debug\SP.pdb
+C:\Users\Nkosana\source\repos\SP\obj\Debug\SP.sqlprojAssemblyReference.cache
+C:\Users\Nkosana\source\repos\SP\obj\Debug\Model.xml
+C:\Users\Nkosana\source\repos\SP\obj\Debug\refactor.xml
+C:\Users\Nkosana\source\repos\SP\obj\Debug\postdeploy.sql
+C:\Users\Nkosana\source\repos\SP\obj\Debug\predeploy.sql
+C:\Users\Nkosana\source\repos\SP\obj\Debug\SP.dll
+C:\Users\Nkosana\source\repos\SP\obj\Debug\SP.pdb

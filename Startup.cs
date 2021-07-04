@@ -7,7 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MovieApiV;
+using MovieApiV.Services;
 using MovieApiV2Web1.Data;
+//using MovieApiV;
+//using MovieApiV.Model;
+//using MovieApiV.Services;
+//using MovieApiV2.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +23,13 @@ namespace MovieApiV2Web1
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Env = environment;
+
         }
+        public IWebHostEnvironment Env { get; set; }
 
         public IConfiguration Configuration { get; }
 
@@ -34,6 +43,14 @@ namespace MovieApiV2Web1
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<DataHandler, DataHandler>();
+            services.AddSingleton<Utils, Utils>();
+
+            if (Env.IsDevelopment()) 
+            {
+                services.AddRazorPages()
+                 .AddRazorRuntimeCompilation();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,12 +60,13 @@ namespace MovieApiV2Web1
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+           
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                //app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -62,7 +80,7 @@ namespace MovieApiV2Web1
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=LandingPage}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

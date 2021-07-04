@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MovieApiV.Model.Car>
+@{
+    ViewData["Title"] = "Car Inventory";
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+}
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Car</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parts</a>
+    </li>
+    @*<li class="nav-item">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+    </li>*@
+</ul>
+<p></p>
+<div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <table class="table table-striped col-md-12" id="tbl">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Make)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Model)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Mileage)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Year)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>   @Html.DisplayFor(modelItem => item.Make)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Model)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Mileage)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Year)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Price)</td>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a asp-action="Edit" class="dropdown-item">Edit</a>
+                                    <a asp-action="Details" class="dropdown-item">Detail</a>
+                                    <a asp-action="Delete" class="dropdown-item">Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
+@section scripts
+{
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tbl').DataTable({
+                order:
+                    [
+                        ['1', 'desc']
+                    ]
+            });
+        });
+    </script>
+}

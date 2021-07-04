@@ -1,8 +1,158 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<MovieApiV.Model.Car>
+@{
+    ViewData["Title"] = "Car Inventory";
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="col-md-12 col-xs-12" style="padding-top: 30px; padding-bottom: 40px;">
+    <div class="row">
+        <div class="col-sm-12 col-md-offset-1"><h1 class="padbottom-20 margin-0 text-emboss">Cars for Sale, Search for Yours Today.</h1></div>
+        <div class="col-sm-2 col-md-offset-1 marginbottom-10">
+            <select name="ctl00$HeaderBottomContent$DdlMake" id="DdlMake" class="form-control">
+
+                <option value="">Make</option>
+                <option value="137">Abarth</option>
+                <option value="1">Alfa Romeo</option>
+                <option value="51">Aston Martin</option>
+                <option value="12">Audi</option>
+                <option value="190">BAIC</option>
+                <option value="60">Bentley</option>
+                <option value="2">BMW</option>
+                <option value="84">Cadillac</option>
+                <option value="73">CAM</option>
+                <option value="67">Chana</option>
+                <option value="82">Chery</option>
+                <option value="14">Chevrolet</option>
+                <option value="13">Chrysler</option>
+                <option value="4">Citroen</option>
+                <option value="25">Daihatsu</option>
+                <option value="178">Datsun</option>
+                <option value="65">Dodge</option>
+                <option value="52">Ferrari</option>
+                <option value="26">Fiat</option>
+                <option value="11">Ford</option>
+                <option value="76">Foton</option>
+                <option value="85">Geely</option>
+                <option value="128">Golden Journey</option>
+                <option value="80">GWM</option>
+                <option value="148">Harley Davidson</option>
+                <option value="189">Haval</option>
+                <option value="20">Honda</option>
+                <option value="61">Hummer</option>
+                <option value="15">Hyundai</option>
+                <option value="166">Infiniti</option>
+                <option value="23">Isuzu</option>
+                <option value="74">Iveco</option>
+                <option value="193">JAC</option>
+                <option value="38">Jaguar</option>
+                <option value="22">Jeep</option>
+                <option value="130">Jinbei</option>
+                <option value="131">JMC</option>
+                <option value="19">Kia</option>
+                <option value="132">KTM</option>
+                <option value="59">Lamborghini</option>
+                <option value="9">Land Rover</option>
+                <option value="44">Lexus</option>
+                <option value="54">Mahindra</option>
+                <option value="58">Maserati</option>
+                <option value="27">Mazda</option>
+                <option value="175">McLaren</option>
+                <option value="21">Mercedes-Benz</option>
+                <option value="28">MG</option>
+                <option value="37">Mini</option>
+                <option value="10">Mitsubishi</option>
+                <option value="29">Nissan</option>
+                <option value="3">Opel</option>
+                <option value="36">Peugeot</option>
+                <option value="168">Pontiac</option>
+                <option value="5">Porsche</option>
+                <option value="18">Renault</option>
+                <option value="133">Rolls-Royce</option>
+                <option value="66">Seat</option>
+                <option value="35">Smart</option>
+                <option value="31">SsangYong</option>
+                <option value="16">Subaru</option>
+                <option value="34">Suzuki</option>
+                <option value="17">Tata</option>
+                <option value="32">Toyota</option>
+                <option value="8">Volkswagen</option>
+                <option value="33">Volvo</option>
+            </select>
+        </div>
+        <div class="col-sm-2 marginbottom-10">
+            <select name="ctl00$HeaderBottomContent$DdlModelRange" id="HeaderBottomContent_DdlModelRange" class="form-control" disabled="">
+
+                <option value="">Model</option>
+            </select>
+        </div>
+        <div class="col-sm-2 marginbottom-10">
+            <select name="ctl00$HeaderBottomContent$DblProvinces" id="DblProvinces" class="form-control">
+                <option selected="selected" value="0">All Provinces</option>
+                <option value="6">Eastern Cape</option>
+                <option value="5">Free State</option>
+                <option value="1">Gauteng</option>
+                <option value="4">Kwazulu Natal</option>
+                <option value="9">Limpopo</option>
+                <option value="8">Mpumalanga</option>
+                <option value="3">Northwest Province</option>
+                <option value="7">Northern Cape</option>
+                <option value="2">Western Cape</option>
+            </select>
+        </div>
+        <div class="col-sm-2 marginbottom-10">
+            <select name="ctl00$HeaderBottomContent$DdlPriceRange" id="HeaderBottomContent_DdlPriceRange" class="form-control">
+                <option value="0">Price Range</option>
+                <option value="0-24999">R0 - R24,999</option>
+                <option value="25000-49999">R25,000 - R49,999</option>
+                <option value="50000-74999">R50,000 - R74,999</option>
+                <option value="75000-99999">R75,000 - R99,999</option>
+                <option value="100000-124999">R100,000 - R124,999</option>
+                <option value="125000-149999">R125,000 - R149,999</option>
+                <option value="150000-174999">R150,000 - R174,999</option>
+                <option value="175000-199999">R175,000 - R199,999</option>
+                <option value="200000-249999">R200,000 - R249,999</option>
+                <option value="250000-299999">R250,000 - R299,999</option>
+                <option value="300000-399999">R300,000 - R399,999</option>
+                <option value="400000-499999">R400,000 - R499,999</option>
+                <option value="500000-599999">R500,000 - R599,999</option>
+                <option value="600000-749999">R600,000 - R749,999</option>
+                <option value="750000-999999">R750,000 - R999,999</option>
+                <option value="750000-999999">R750,000 - R999,999</option>
+                <option value="1000000-1499999">R1,000,000 - R1,499,999</option>
+                <option value="1500000-10000000">Upward of R1,500,000</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" name="ctl00$HeaderBottomContent$BtnQuickSearch1" value="Search for a Car" id="BtnQuickSearch1" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
+            <div class="margintop-20 marginleft-5 hidden"> Vehicles Sold!</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4" style="border:2px solid black">
+            <div style="text-align: center; border-bottom: 2px solid black">
+                <h3>@item.Model</h3>
+            </div>
+            <div>
+                <div class="col-md-8">
+                    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg?crop=1xw:0.9997727789138833xh;center,top&resize=480:*" width="150px" height="150px" />
+                </div>
+                <div class="col-md-4" style="text-align: left;">
+                    <b>@item.Make</b>
+                </div>
+            </div>
+
+            <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
+                <b>@item.Price</b>
+            </div>
+
+            <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
+                <input type="button" value="Add to Cart" />
+            </div>
+        </div>
+    }
+
 </div>

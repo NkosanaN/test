@@ -18,6 +18,19 @@
             }
         });
     };
+
+    function PartSearch() {
+
+        var make = $('Make').val();
+        var price = $('PriceRange').val();
+        $.ajax({
+            url: '/home/index',
+            method: 'POST',
+            data: { 'make': make, 'price': price },
+            success: function (x) {
+            }
+        });
+    };
 </script>
 
 <div class="col-md-12 col-xs-12" style="padding-top: 30px; padding-bottom: 40px;">
@@ -68,7 +81,7 @@
             </select>
         </div>
         <div class="col-sm-2">
-            <input type="submit" name="BtnQuickSearch1" value="Search for a Car" id="BtnQuickSearch1" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
+            <input type="submit" name="BtnQuickSearch1" value="Search for a Car" id="BtnQuickSearch1" onclick="PartSearch()" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
             <div class="margintop-20 marginleft-5 hidden"> Vehicles Sold!</div>
         </div>
     </div>

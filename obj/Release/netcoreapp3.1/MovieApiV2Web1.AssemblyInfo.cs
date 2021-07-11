@@ -11,7 +11,6 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-MovieApiV2Web1-038548A8-BE81-46C0-A016-4A40E98C61DE")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("MovieApiV2Web1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]

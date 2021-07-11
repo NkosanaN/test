@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MovieApiV.Model.Payments>
+
+@{
+    ViewData["Title"] = "PaymentList";
+}
+
+<h1>Customer Payment</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerPaymentCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarSoldCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentStatusCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDateDue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentAmount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerPaymentCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarSoldCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentStatusCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentDateDue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentAmount)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

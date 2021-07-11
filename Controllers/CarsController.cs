@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MovieApiV.Services;
+using MovieApiV.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,30 +22,37 @@ namespace MovieApiV2Web1.Controllers
         // GET: LandingPage
         public async Task<IActionResult> Index()
         {
-            var r = await dataHandler.CarListGet();
-            return View(r);
+            var car = await dataHandler.CarListGet();
+            var part = await dataHandler.PartListGet();
+            return View((car,part) );
         }
 
         // GET: CarsController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(string code)
         {
-            return View();
+            var r = await dataHandler.CarGetSingle(code);
+            return View(r);
         }
 
         // GET: CarsController/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Car());
         }
 
         // POST: CarsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(Car model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var r = await dataHandler.CarAddUpdate(model,4);
+                if(r)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {
@@ -53,19 +61,25 @@ namespace MovieApiV2Web1.Controllers
         }
 
         // GET: CarsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string code)
         {
-            return View();
+            var r = await dataHandler.CarGetSingle(code);
+            return View(r);
         }
 
         // POST: CarsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(Car model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var r = await dataHandler.CarAddUpdate(model, 5);
+                if (r)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {
@@ -74,19 +88,25 @@ namespace MovieApiV2Web1.Controllers
         }
 
         // GET: CarsController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(string code)
         {
-            return View();
+            var r = await dataHandler.CarGetSingle(code);
+            return View(r);
         }
 
         // POST: CarsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(Car model)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var r = await dataHandler.CarDelete(model.CarCode);
+                if (r)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
             catch
             {

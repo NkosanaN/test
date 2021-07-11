@@ -13,14 +13,14 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <input asp-for="CarId" class="form-control" />
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <label asp-for="CarCode" class="control-label"></label>
+                <input asp-for="CarCode" class="form-control" />
+                <span asp-validation-for="CarCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Make" class="control-label"></label>
-                <input asp-for="Make" class="form-control" />
-                <span asp-validation-for="Make" class="text-danger"></span>
+                <label asp-for="CarDescription" class="control-label"></label>
+                <input asp-for="CarDescription" class="form-control" />
+                <span asp-validation-for="CarDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -38,14 +38,29 @@
                 <span asp-validation-for="Mileage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Year" class="control-label"></label>
-                <input asp-for="Year" class="form-control" />
-                <span asp-validation-for="Year" class="text-danger"></span>
+                <label asp-for="ReqistationYear" class="control-label"></label>
+                <input asp-for="ReqistationYear" class="form-control" />
+                <span asp-validation-for="ReqistationYear" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
+                <label asp-for="ManufactureCode" class="control-label"></label>
+                <input asp-for="ManufactureCode" class="form-control" />
+                <span asp-validation-for="ManufactureCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateAcquired" class="control-label"></label>
+                <input asp-for="DateAcquired" class="form-control" />
+                <span asp-validation-for="DateAcquired" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CatCode" class="control-label"></label>
+                <input asp-for="CatCode" class="form-control" />
+                <span asp-validation-for="CatCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModelCode" class="control-label"></label>
+                <input asp-for="ModelCode" class="form-control" />
+                <span asp-validation-for="ModelCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImagePicture" class="control-label"></label>

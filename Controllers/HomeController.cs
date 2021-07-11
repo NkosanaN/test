@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MovieApiV2Web1.Models;
+using MovieApiV.Model;
 using MovieApiV.Services;
 using System;
 using System.Collections.Generic;
@@ -20,10 +20,22 @@ namespace MovieApiV2Web1.Controllers
             dataHandler = handler;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string make = null,decimal price = 0)
         {
-            var r = await dataHandler.CarListGet();
-            return View(r);
+            var list = new List<Car>();
+            if(!string.IsNullOrEmpty(make))
+            {
+                var l = await dataHandler.CarListGet();
+                list = l.Where(l => l.ManufactureCode == make).ToList();
+            }
+
+            if (price > 0)
+            {
+                var l = await dataHandler.CarListGet();
+                list = l.Where(l => l.Price  >= price && l.Price <= price).ToList();
+            }
+
+            return View(list);
         }
 
         public IActionResult Privacy()
@@ -31,10 +43,10 @@ namespace MovieApiV2Web1.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

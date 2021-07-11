@@ -3,34 +3,173 @@
     ViewData["Title"] = "Car Inventory";
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 }
+<script>
 
-<h1>Car List</h1>
+    function AddToCart(id, car) {
+        $.ajax({
+            url: '/cart/create',
+            method: 'POST',
+            data: { 'id': id, 'iscar': car },
+            success: function (x) {
+            }
+        });
+    };
 
+    function CarSearch(make,price) {
+        $.ajax({
+            url: '/home/index',
+            method: 'POST',
+            data: { 'make': id, 'price': car },
+            success: function (x) {
+            }
+        });
+    };
+</script>
+
+<div class="col-md-12 col-xs-12" style="padding-top: 30px; padding-bottom: 40px;">
+    <div class="row">
+        <div class="col-sm-12 col-md-offset-1"><h1 class="padbottom-20 margin-0 text-emboss">Cars for Sale, Search for Yours Today.</h1></div>
+        <div class="col-sm-2 col-md-offset-1 marginbottom-10">
+            <select  id="Make" class="form-control">
+
+                <option value="">Make</option>
+                <option value="Audi">Audi</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="Mini">Mini</option>
+                <option value="Mitsubishi">Mitsubishi</option>
+                <option value="Nissan">Nissan</option>
+                <option value="Opel">Opel</option>
+                <option value="Peugeot">Peugeot</option>
+                <option value="Porsche">Porsche</option>
+                <option value="Renault">Renault</option>
+                <option value="Subaru">Subaru</option>
+                <option value="Suzuki">Suzuki</option>
+                <option value="Tata">Tata</option>
+                <option value="Toyota">Toyota</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Volvo">Volvo</option>
+            </select>
+        </div>
+        <div class="col-sm-2 marginbottom-10">
+            <select name="PriceRange" id="PriceRange" class="form-control">
+                <option value="0">Price Range</option>
+                <option value="0-24999">R0 - R24,999</option>
+                <option value="25000-49999">R25,000 - R49,999</option>
+                <option value="50000-74999">R50,000 - R74,999</option>
+                <option value="75000-99999">R75,000 - R99,999</option>
+                <option value="100000-124999">R100,000 - R124,999</option>
+                <option value="125000-149999">R125,000 - R149,999</option>
+                <option value="150000-174999">R150,000 - R174,999</option>
+                <option value="175000-199999">R175,000 - R199,999</option>
+                <option value="200000-249999">R200,000 - R249,999</option>
+                <option value="250000-299999">R250,000 - R299,999</option>
+                <option value="300000-399999">R300,000 - R399,999</option>
+                <option value="400000-499999">R400,000 - R499,999</option>
+                <option value="500000-599999">R500,000 - R599,999</option>
+                <option value="600000-749999">R600,000 - R749,999</option>
+                <option value="750000-999999">R750,000 - R999,999</option>
+                <option value="750000-999999">R750,000 - R999,999</option>
+                <option value="1000000-1499999">R1,000,000 - R1,499,999</option>
+                <option value="1500000-10000000">Upward of R1,500,000</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" name="BtnQuickSearch1" value="Search for a Car" id="BtnQuickSearch1" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
+            <div class="margintop-20 marginleft-5 hidden"> Vehicles Sold!</div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4" style="border:2px solid black">
-            <div style="text-align: center; border-bottom: 2px solid black">
-                <h3>@item.Model</h3>
-            </div>
-            <div>
-                <div class="col-md-8">
-                    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg?crop=1xw:0.9997727789138833xh;center,top&resize=480:*" width="150px" height="150px" />
-                </div>
-                <div class="col-md-4" style="text-align: left;">
-                    <b>@item.Make</b>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12" style="border:2px solid black">
+                    <div style="text-align: center; border-bottom: 2px solid black">
+                        <h3>@item.ModelCode</h3>
+                    </div>
+                    <div>
+                        <div class="col-md-8">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <b>2021 Toyota Camry</b>
+                        </div>
+                    </div>
 
-            <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
-                <b>@item.Price</b>
-            </div>
+                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
+                        <b>@item.Price</b>
+                    </div>
 
-            <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px"> 
-                <input type="button" value="Add to Cart" />
-            </div>
+                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
+                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
+                    </div>
+                </div>
+
+                <br />
+                <br />
+            }
         </div>
-    }
+        <div class="col-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12" style="border:2px solid black">
+                    <div style="text-align: center; border-bottom: 2px solid black">
+                        <h3>@item.ModelCode</h3>
+                    </div>
+                    <div>
+                        <div class="col-md-8">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbosLrPvBThvmn4fPyZP9IIU5c1Vx93kBFKEEb4ZhBkgrwqMFTdNSy3eb2LDwb79ViIU&usqp=CAU" width="150px" height="150px" />
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <b>2021 Toyota Camry</b>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
+                        <b>480000</b>
+                    </div>
+
+                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
+                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
+                    </div>
+                </div>
+
+                <br />
+                <br />
+            }
+        </div>
+        <div class="col-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-12" style="border:2px solid black">
+                    <div style="text-align: center; border-bottom: 2px solid black">
+                        <h3>@item.ModelCode</h3>
+                    </div>
+                    <div>
+                        <div class="col-md-8">
+                            <img src="https://img2.carmax.com/img/vehicles/20522663/1.jpg?width=800" width="150px" height="150px" />
+                        </div>
+                        <div class="col-md-4" style="text-align: left;">
+                            <b>2021 Toyota Camry</b>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
+                        <b>278000</b>
+                    </div>
+
+                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
+                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
+                    </div>
+                </div>
+
+                <br />
+                <br />
+            }
+        </div>
+    </div>
+
 
 </div>

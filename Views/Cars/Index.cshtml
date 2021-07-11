@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovieApiV.Model.Car>
+﻿@model (List<MovieApiV.Model.Car>, List<MovieApiV.Model.Part>)
 @{
     ViewData["Title"] = "Car Inventory";
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
@@ -9,35 +9,34 @@
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Car</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Parts</a>
+        <a class="nav-link" id="part-tab" data-toggle="tab" href="#part" role="tab" aria-controls="part" aria-selected="false">Parts</a>
     </li>
-    @*<li class="nav-item">
-        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-    </li>*@
 </ul>
 <p></p>
 <div class="tab-content" id="myTabContent">
-
+   
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <a asp-action="create" class="btn btn-dark">New Car </a>
+        <br />
         <table class="table table-striped col-md-12" id="tbl">
             <thead>
                 <tr>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Make)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Model)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Mileage)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Year)</th>
-                    <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
+                    <th>Car Description</th>
+                    <th>Model Code</th>
+                    <th>Mileage</th>
+                    <th>Registation Year</th>
+                    <th>Price</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.Item1)
                 {
                     <tr>
-                        <td>   @Html.DisplayFor(modelItem => item.Make)</td>
-                        <td>   @Html.DisplayFor(modelItem => item.Model)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.CarDescription)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.ModelCode)</td>
                         <td>   @Html.DisplayFor(modelItem => item.Mileage)</td>
-                        <td>   @Html.DisplayFor(modelItem => item.Year)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.ReqistationYear)</td>
                         <td>   @Html.DisplayFor(modelItem => item.Price)</td>
 
                         <td>
@@ -58,9 +57,65 @@
         </table>
     </div>
 
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane fade" id="part" role="tabpanel" aria-labelledby="part-tab">
+        <a asp-action="create"  asp-controller="Part" class="btn btn-dark">New Part </a>
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        PartCode
+                    </th>
+                    <th>
+                        PartName
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Manufacture
+                    </th>
+                    <th>
+                        Year
+                    </th>
+                    <th>
+                        Model
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item2)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PartCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PartName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manufacture)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Model)
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane fade" id="part" role="tabpanel" aria-labelledby="part-tab">...</div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
 </div>
+
 @section scripts
 {
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

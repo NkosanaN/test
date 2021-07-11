@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "RegisterSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<button class="btn btn-dark" asp-page="/Account/Login">Click</button>*@
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Registed Successful</p>
+    <hr>
+    <p class="mb-0">Please Click Login.</p>
+</div>
+
+<a asp-action="Login" class="btn btn-dark">Click to Login</a>

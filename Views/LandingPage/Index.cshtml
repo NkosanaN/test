@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-sm-12 col-md-offset-1"><h1 class="padbottom-20 margin-0 text-emboss">Cars for Sale, Search for Yours Today.</h1></div>
         <div class="col-sm-2 col-md-offset-1 marginbottom-10">
-            <select  id="Make" class="form-control">
+            <select id="Make" class="form-control">
 
                 <option value="">Make</option>
                 <option value="Audi">Audi</option>
@@ -83,9 +83,15 @@
     </div>
 </div>
 
-<div class="container">
+<div>
+    <div class="col-12">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+    </div>
+</div>
+
+@*<div class="container">
     <div class="row">
-        <div class="col-4">
+        <div class="col-6">
             @foreach (var item in Model)
             {
                 <div class="col-md-12" style="border:2px solid black">
@@ -94,10 +100,10 @@
                     </div>
                     <div>
                         <div class="col-md-8">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+                            <img src="C:\Users\Loyd.Mabulana\source\repos\test\wwwroot\Pictures\Toyota_Corolla.jpg" width="150px" height="150px" />
                         </div>
                         <div class="col-md-4" style="text-align: left;">
-                            <b>2021 Toyota Camry</b>
+                            <b>@item.CarDescription</b>
                         </div>
                     </div>
 
@@ -105,66 +111,9 @@
                         <b>@item.Price</b>
                     </div>
 
-                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
-                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
-                    </div>
-                </div>
-
-                <br />
-                <br />
-            }
-        </div>
-        <div class="col-4">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-12" style="border:2px solid black">
-                    <div style="text-align: center; border-bottom: 2px solid black">
-                        <h3>@item.ModelCode</h3>
-                    </div>
-                    <div>
-                        <div class="col-md-8">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKbosLrPvBThvmn4fPyZP9IIU5c1Vx93kBFKEEb4ZhBkgrwqMFTdNSy3eb2LDwb79ViIU&usqp=CAU" width="150px" height="150px" />
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <b>2021 Toyota Camry</b>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
-                        <b>480000</b>
-                    </div>
-
-                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
-                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
-                    </div>
-                </div>
-
-                <br />
-                <br />
-            }
-        </div>
-        <div class="col-4">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-12" style="border:2px solid black">
-                    <div style="text-align: center; border-bottom: 2px solid black">
-                        <h3>@item.ModelCode</h3>
-                    </div>
-                    <div>
-                        <div class="col-md-8">
-                            <img src="https://img2.carmax.com/img/vehicles/20522663/1.jpg?width=800" width="150px" height="150px" />
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <b>2021 Toyota Camry</b>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
-                        <b>278000</b>
-                    </div>
-
-                    <div class="col-md-4" style="text-align: right; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
-                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
+                    <div class="col-md-4" style="text-align: left; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
+                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />|
+                        <a class="btn btn-warning" asp-controller="Cars" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
                     </div>
                 </div>
 
@@ -175,4 +124,4 @@
     </div>
 
 
-</div>
+</div>*@

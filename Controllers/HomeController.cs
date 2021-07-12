@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using MovieApiV.Model;
 using MovieApiV.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,16 +17,21 @@ namespace MovieApiV2Web1.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly DataHandler dataHandler;
-        public HomeController(ILogger<HomeController> logger, DataHandler handler)
+
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public HomeController(ILogger<HomeController> logger, DataHandler handler, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             dataHandler = handler;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<IActionResult> Index(string make = null,decimal price = 0)
         {
             var list = new List<Car>();
-            if(!string.IsNullOrEmpty(make))
+            list = await dataHandler.CarListGet();
+            if (!string.IsNullOrEmpty(make))
             {
                 var l = await dataHandler.CarListGet();
                 list = l.Where(l => l.ManufactureCode == make).ToList();
@@ -36,6 +44,15 @@ namespace MovieApiV2Web1.Controllers
             }
 
             return View(list);
+        }
+
+        public IActionResult OnGet()
+        {
+            var provider = new PhysicalFileProvider(webHostEnvironment.WebRootPath);
+            var contents = provider.GetDirectoryContents(Path.Combine("pictures"));
+            var objFiles = contents.OrderBy(m => m.LastModified);
+
+            return new JsonResult(objFiles);
         }
 
         public IActionResult Privacy()

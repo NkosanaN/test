@@ -152,7 +152,7 @@ namespace MovieApiV2Web1.Controllers
             var payment = await dataHandler.Payment(type, code, customer);
             if (payment)
             {
-                return RedirectToAction("Index", "Home", new { });
+                return View("success");
             }
             return View();
         }

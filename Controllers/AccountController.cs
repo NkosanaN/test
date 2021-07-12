@@ -94,32 +94,14 @@ namespace MovieApiV2Web1.Controllers
             return View(model);
         }
 
-        //must go to loyd's part
-
-        public async Task<ActionResult> BookToDriver()
-        { return View(); }
-        [HttpPost]
-        public async Task<ActionResult> BookToDriver(Bookings model) 
-        {
-            try
-            {
-                var r = await dataHandler.AddBooking(model);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-  
-            return View();
-        }
+        
 
 
         [HttpPost]
         public async Task<ActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "LandingPage");
         }
 
 

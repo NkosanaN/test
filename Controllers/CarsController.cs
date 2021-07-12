@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MovieApiV2Web1.Controllers
 {
@@ -30,33 +31,68 @@ namespace MovieApiV2Web1.Controllers
         // GET: CarsController/Details/5
         public async Task<IActionResult> Details(string code)
         {
-            var r = await dataHandler.CarGetSingle(code);
-            return View(r);
+            var data = await dataHandler.CarListGet();
+            var model = data.FirstOrDefault(p => p.CarCode == code);
+            return View(model);
         }
 
         // GET: CarsController/Create
         public ActionResult Create()
         {
-            return View(new Car());
+            var m = new Car { DateAcquired = DateTime.Now , ReqistationYear = DateTime.Now };
+            return View(m);
+           
         }
+
+        public List<string> validImageTypes = new List<string>
+        {
+            "image/gif",
+            "image/jpeg",
+            "image/pjpeg",
+            "image/png"
+        };
 
         // POST: CarsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Car model)
+        public async Task<ActionResult> Create(Car model1, IFormFile Car)
         {
             try
             {
-                var r = await dataHandler.CarAddUpdate(model,4);
+                if (model1.Image.Length > 48000)
+                {
+                    ModelState.AddModelError("ImagePicture", "The file is too large, 48kb maximum");
+                }
+                if (!validImageTypes.Contains(model1.Image.ContentType))
+                {
+                    ModelState.AddModelError("ImagePicture", "Invalid file type, please upload jpg or png files only");
+                }
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model1.Image.CopyToAsync(memoryStream);
+
+                    model1.ImagePicture = memoryStream.ToArray();
+                }
+                model1.ImagePath = Path.GetFileName(model1.Image.FileName);
+                var r = await dataHandler.CarAddUpdate(model1, 4);
                 if(r)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("index", "admin");
                 }
-                return View();
+                return View("Error");
             }
             catch
             {
-                return View();
+                return View(model1);
+            }
+        }
+
+        private byte[] GetByteArrayFromImage(IFormFile file)
+        {
+            using (var target = new MemoryStream())
+            {
+                file.CopyTo(target);
+                return target.ToArray();
             }
         }
 
@@ -112,6 +148,33 @@ namespace MovieApiV2Web1.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult BookToDriver(string carname)
+        {
+            var model = new Bookings { CustName= User.Identity.Name, Revdate = DateTime.Now, TestingCarName= carname };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<ActionResult> BookToDriver(Bookings model)
+        {
+            try
+            {
+                var r = await dataHandler.AddBooking(model);
+                if (r)
+                {
+                    // return RedirectToAction("index", "admin");
+                    return View("success");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return View();
         }
     }
 }

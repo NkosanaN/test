@@ -462,3 +462,7 @@ C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\MovieApiV2Web1.
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\MovieApiV2Web1.dll
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\MovieApiV2Web1.pdb
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\MovieApiV2Web1.genruntimeconfig.cache
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cars\BookToDriver.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\success.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\StockEdit.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\bookingsuccess.cshtml.g.cs

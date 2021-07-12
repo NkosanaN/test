@@ -1,0 +1,46 @@
+﻿@model MovieApiV.Model.StockBal
+
+<h4>StockBal</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StockEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="StockId" hidden/> 
+            @*<div class="form-group">
+                <label asp-for="StockId" class="control-label"></label>
+                <input asp-for="StockId" class="form-control" />
+                <span asp-validation-for="StockId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="PaymentType" class="control-label"></label>
+                <input asp-for="PaymentType" class="form-control" />
+                <span asp-validation-for="PaymentType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalStockQty" class="control-label"></label>
+                <input asp-for="TotalStockQty" class="form-control" />
+                <span asp-validation-for="TotalStockQty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarModel" class="control-label"></label>
+                <input asp-for="CarModel" class="form-control" />
+                <span asp-validation-for="CarModel" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Approve" /> @Html.DisplayNameFor(model => model.Approve)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <input asp-for="StockId" hidden />
+    <a asp-action="Index">Back to List</a>
+</div>
+

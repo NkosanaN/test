@@ -31,7 +31,8 @@ namespace MovieApiV2Web1.Controllers
         public async Task<ActionResult> Index()
         {
             var model = await dataHandler.BookingListGet();
-            return View(model);
+            var smodel = await dataHandler.StockListGet();
+            return View((model,smodel));
         }
 
         // GET: AdminController/Create
@@ -111,5 +112,36 @@ namespace MovieApiV2Web1.Controllers
                 return View(model);
             }
         }
+
+        public async Task<ActionResult> StockEdit(int id)
+        {
+
+            var smodel = await dataHandler.StockListGet();
+            var model = smodel.FirstOrDefault(r => r.StockId == id);
+            return View(model);
+        }
+
+        // POST: AdminController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> StockEdit(int id, StockBal model)
+        {
+            try
+            {
+                var r = await dataHandler.UpdateBooking(model, id);
+                if (r)
+                    return RedirectToAction(nameof(Index));
+                else
+                    View("Error");
+
+            }
+            catch (Exception ex)
+            {
+                return View(ex);
+            }
+            return View(model);
+        }
+
+
     }
 }

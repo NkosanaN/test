@@ -1,0 +1,44 @@
+﻿@model MovieApiV.Model.Bookings
+
+<h4>Bookings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BookToDriver">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="TestingCarName" class="control-label"></label>
+                <input asp-for="TestingCarName" class="form-control" />
+                <span asp-validation-for="TestingCarName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustName" class="control-label"></label>
+                <input asp-for="CustName" class="form-control" />
+                <span asp-validation-for="CustName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Revdate" class="control-label"></label>
+                <input asp-for="Revdate" class="form-control" />
+                <span asp-validation-for="Revdate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="hasCome" /> @Html.DisplayNameFor(model => model.hasCome)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

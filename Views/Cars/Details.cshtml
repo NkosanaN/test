@@ -5,8 +5,12 @@
 }
 
 <h1>Details</h1>
-
 <div>
+    <div class="col-6">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+    </div>
+</div>
+<div class="container">
     <h4>Car</h4>
     <hr />
     <dl class="row">
@@ -52,15 +56,47 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CatCode)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImagePicture)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ImagePicture)
-        </dd>
+        </dd>*@
     </dl>
-</div>
+
+    <a class="btn btn-warning" asp-controller="Cars" asp-route-carname="@Model.ModelCode" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
+<p/>
+
 <div>
-    @Html.ActionLink("Edit", "Edit", new {  code = Model.CarCode }) |
-    <a asp-action="Index">Back to List</a>
+    <input type="button" value="Add to Cart" class="btn btn-outline-info"  onclick="AddToCart('@Model.CarCode',true)" />
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
 </div>
+
+</div>
+
+
+<script>
+
+    function AddToCart(id, car) {
+        $.ajax({
+            url: '/cart/create',
+            method: 'POST',
+            data: { 'id': id, 'iscar': car },
+            success: function (x) {
+            }
+        });
+    };
+
+    function CarSearch() {
+
+        var make = $('Make').val();
+        var price = $('PriceRange').val();
+        $.ajax({
+            url: '/home/index',
+            method: 'POST',
+            data: { 'make': make, 'price': price },
+            success: function (x) {
+            }
+        });
+    };
+</script>

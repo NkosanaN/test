@@ -94,7 +94,7 @@ namespace MovieApiV2Web1.Controllers
             }
             catch (Exception ex)
             {
-                return View(ex.Message);
+                return View("Error");
             }
             return View(model1);
         }
@@ -108,24 +108,55 @@ namespace MovieApiV2Web1.Controllers
         }
 
         // GET: PartsController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            var data = await dataHandler.PartListGet();
+            var model = data.FirstOrDefault(p => p.PartCode == id);
+            return View(model);
         }
 
         // POST: PartsController/Edit/5
         [HttpPost]
 
-        public ActionResult Edit(int id, string collection)
+        public async Task<IActionResult> Edit(Part model1)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+
+                if (model1.Image != null)
+                {
+                    if (model1.Image.Length > 48000)
+                    {
+                        ModelState.AddModelError("ImagePicture", "The file is too large, 48kb maximum");
+                    }
+                    if (!validImageTypes.Contains(model1.Image.ContentType))
+                    {
+                        ModelState.AddModelError("ImagePicture", "Invalid file type, please upload jpg or png files only");
+                    }
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await model1.Image.CopyToAsync(memoryStream);
+
+                        model1.ImagePicture = memoryStream.ToArray();
+                    }
+                    model1.ImagePath = Path.GetFileName(model1.Image.FileName);
+
+                    if (ModelState.IsValid)
+                    {
+                        var r = await dataHandler.PartAddUpdate(model1, 4);
+                        if (r)
+                        {
+                            return RedirectToAction("index", "admin");
+                        }
+                        return View("Error");
+                    }
+                }
             }
             catch
             {
-                return View();
+                return View("Error");
             }
+            return View(model1);
         }
 
         // GET: PartsController/Delete/5

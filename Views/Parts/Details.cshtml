@@ -2,13 +2,20 @@
 
 @{
     ViewData["Title"] = "Details";
+
+    string imgSrc = "";
+    if (Model.ImagePicture != null)
+    {
+        var base64 = Convert.ToBase64String(Model.ImagePicture);
+        imgSrc = String.Format("data:image;base64,{0}", base64);
+    }
 }
 
 <h1>Details</h1>
 
 <div>
     <div class="col-6">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+        <img src="@imgSrc" height="300" width="400"  />
     </div>
 </div>
 <div>

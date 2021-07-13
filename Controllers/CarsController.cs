@@ -163,7 +163,6 @@ namespace MovieApiV2Web1.Controllers
                 var r = await dataHandler.AddBooking(model);
                 if (r)
                 {
-                    // return RedirectToAction("index", "admin");
                     return View("success");
                 }
                 return View();

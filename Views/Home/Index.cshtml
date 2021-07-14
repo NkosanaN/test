@@ -1,135 +1,101 @@
-﻿@model IEnumerable<MovieApiV.Model.Car>
+﻿@model (List<MovieApiV.Model.Car>, List<MovieApiV.Model.Part>)
 @{
     ViewData["Title"] = "Car Inventory";
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 }
-<h2 class="p-2">Cars</h2>
+
+<h2 class="alert alert-primary text-center" role="alert">Cars & Parts</h2>
+
+
+
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
-@*<div class="col-md-12 col-xs-12" style="padding-top: 30px; padding-bottom: 40px;">
-        <div class="row">
-            <div class="col-sm-12 col-md-offset-1"><h1 class="padbottom-20 margin-0 text-emboss">Cars for Sale, Search for Yours Today.</h1></div>
-            <div class="col-sm-2 col-md-offset-1 marginbottom-10">
-                <select id="Make" class="form-control">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Car</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="part-tab" data-toggle="tab" href="#part" role="tab" aria-controls="part" aria-selected="false">Parts</a>
+    </li>
+</ul>
+<p></p>
+<div class="tab-content" id="myTabContent">
 
-                    <option value="">Make</option>
-                    <option value="Audi">Audi</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Mini">Mini</option>
-                    <option value="Mitsubishi">Mitsubishi</option>
-                    <option value="Nissan">Nissan</option>
-                    <option value="Opel">Opel</option>
-                    <option value="Peugeot">Peugeot</option>
-                    <option value="Porsche">Porsche</option>
-                    <option value="Renault">Renault</option>
-                    <option value="Subaru">Subaru</option>
-                    <option value="Suzuki">Suzuki</option>
-                    <option value="Tata">Tata</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Volkswagen">Volkswagen</option>
-                    <option value="Volvo">Volvo</option>
-                </select>
-            </div>
-            <div class="col-sm-2 marginbottom-10">
-                <select name="PriceRange" id="PriceRange" class="form-control">
-                    <option value="0">Price Range</option>
-                    <option value="0-24999">R0 - R24,999</option>
-                    <option value="25000-49999">R25,000 - R49,999</option>
-                    <option value="50000-74999">R50,000 - R74,999</option>
-                    <option value="75000-99999">R75,000 - R99,999</option>
-                    <option value="100000-124999">R100,000 - R124,999</option>
-                    <option value="125000-149999">R125,000 - R149,999</option>
-                    <option value="150000-174999">R150,000 - R174,999</option>
-                    <option value="175000-199999">R175,000 - R199,999</option>
-                    <option value="200000-249999">R200,000 - R249,999</option>
-                    <option value="250000-299999">R250,000 - R299,999</option>
-                    <option value="300000-399999">R300,000 - R399,999</option>
-                    <option value="400000-499999">R400,000 - R499,999</option>
-                    <option value="500000-599999">R500,000 - R599,999</option>
-                    <option value="600000-749999">R600,000 - R749,999</option>
-                    <option value="750000-999999">R750,000 - R999,999</option>
-                    <option value="750000-999999">R750,000 - R999,999</option>
-                    <option value="1000000-1499999">R1,000,000 - R1,499,999</option>
-                    <option value="1500000-10000000">Upward of R1,500,000</option>
-                </select>
-            </div>
-            <div class="col-sm-2">
-                <input type="submit" name="BtnQuickSearch1" value="Search for a Car" onclick="CarSearch()" id="BtnQuickSearch1" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
-                <div class="margintop-20 marginleft-5 hidden"> Vehicles Sold!</div>
-            </div>
-        </div>
-    </div>*@
-
-<div class="container">
-    @*<div class="row">
-            <div class="col-6">
-                @foreach (var item in Model)
-                {
-                    <div class="col-md-12" style="border:2px solid black">
-                        <div style="text-align: center; border-bottom: 2px solid black">
-                            <h3>@item.ModelCode</h3>
-                        </div>
-                        <div>
-                            <div class="col-md-8">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
-                            </div>
-                            <div class="col-md-4" style="text-align: left;">
-                                <b>@item.CarDescription</b>
-                            </div>
-                        </div>
-
-                        <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
-                            <b>@item.Price</b>
-                        </div>
-
-                        <div class="col-6" style="text-align: left; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
-                            <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />
-                            <a class="btn btn-warning" asp-controller="Cars" asp-route-carname="@item.ModelCode" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                }
-            </div>
-        </div>*@
-
-    <table class="table table-striped col-md-12" id="tbl">
-        <thead>
-            <tr>
-                <th>Code </th>
-                <th>Description</th>
-                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
-                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Mileage)</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <table class="table table-striped col-md-12" id="items">
+            <thead>
                 <tr>
-                    <td>   @Html.DisplayFor(modelItem => item.CarCode)</td>
-                    <td>   @Html.DisplayFor(modelItem => item.CarDescription)</td>
-                    <td>   @Html.DisplayFor(modelItem => item.Price)</td>
-                    <td>   @Html.DisplayFor(modelItem => item.Mileage)</td>
-
-
-
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                                Action
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <a asp-action="Details" asp-route-code="@item.CarCode" asp-controller="Cars" class="dropdown-item">Detail</a>
-                            </div>
-                        </div>
-                    </td>
+                    <th>Code </th>
+                    <th>Description</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.FirstOrDefault().Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item1.FirstOrDefault().Mileage)</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item1)
+                {
+                    <tr>
+                        <td>   @Html.DisplayFor(modelItem => item.CarCode)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.CarDescription)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Mileage)</td>
 
+
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a asp-action="Details" asp-route-code="@item.CarCode" asp-controller="Cars" class="dropdown-item">Detail</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tab-pane fade" id="part" role="tabpanel" aria-labelledby="part-tab">
+        <table class="table table-striped col-md-12" id="parts">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.Item2.FirstOrDefault().PartCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.FirstOrDefault().PartName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.FirstOrDefault().Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.Item2.FirstOrDefault().Year)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Item2)
+                {
+                    <tr>
+                        <td>   @Html.DisplayFor(modelItem => item.PartCode)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.PartName)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>   @Html.DisplayFor(modelItem => item.Year)</td>
+
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    Action
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a asp-action="Details" asp-route-id="@item.PartCode" class="dropdown-item">Detail</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
 
 @section scripts
 {
@@ -137,12 +103,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tbl').DataTable({
+            $('#items, #parts').DataTable({
                 order:
                     [
                         ['1', 'desc']
                     ]
             });
+
+
         });
     </script>
 }

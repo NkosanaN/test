@@ -28,100 +28,10 @@
         });
     };
 </script>
+<h2>
+    Car Inventory
+</h2>
 
-<div class="col-md-12 col-xs-12" style="padding-top: 30px; padding-bottom: 40px;">
-    <div class="row">
-        <div class="col-sm-12 col-md-offset-1"><h1 class="padbottom-20 margin-0 text-emboss">Cars for Sale, Search for Yours Today.</h1></div>
-        <div class="col-sm-2 col-md-offset-1 marginbottom-10">
-            <select id="Make" class="form-control">
-
-                <option value="">Make</option>
-                <option value="Audi">Audi</option>
-                <option value="Mercedes">Mercedes</option>
-                <option value="Mini">Mini</option>
-                <option value="Mitsubishi">Mitsubishi</option>
-                <option value="Nissan">Nissan</option>
-                <option value="Opel">Opel</option>
-                <option value="Peugeot">Peugeot</option>
-                <option value="Porsche">Porsche</option>
-                <option value="Renault">Renault</option>
-                <option value="Subaru">Subaru</option>
-                <option value="Suzuki">Suzuki</option>
-                <option value="Tata">Tata</option>
-                <option value="Toyota">Toyota</option>
-                <option value="Volkswagen">Volkswagen</option>
-                <option value="Volvo">Volvo</option>
-            </select>
-        </div>
-        <div class="col-sm-2 marginbottom-10">
-            <select name="PriceRange" id="PriceRange" class="form-control">
-                <option value="0">Price Range</option>
-                <option value="0-24999">R0 - R24,999</option>
-                <option value="25000-49999">R25,000 - R49,999</option>
-                <option value="50000-74999">R50,000 - R74,999</option>
-                <option value="75000-99999">R75,000 - R99,999</option>
-                <option value="100000-124999">R100,000 - R124,999</option>
-                <option value="125000-149999">R125,000 - R149,999</option>
-                <option value="150000-174999">R150,000 - R174,999</option>
-                <option value="175000-199999">R175,000 - R199,999</option>
-                <option value="200000-249999">R200,000 - R249,999</option>
-                <option value="250000-299999">R250,000 - R299,999</option>
-                <option value="300000-399999">R300,000 - R399,999</option>
-                <option value="400000-499999">R400,000 - R499,999</option>
-                <option value="500000-599999">R500,000 - R599,999</option>
-                <option value="600000-749999">R600,000 - R749,999</option>
-                <option value="750000-999999">R750,000 - R999,999</option>
-                <option value="750000-999999">R750,000 - R999,999</option>
-                <option value="1000000-1499999">R1,000,000 - R1,499,999</option>
-                <option value="1500000-10000000">Upward of R1,500,000</option>
-            </select>
-        </div>
-        <div class="col-sm-2">
-            <input type="submit" name="BtnQuickSearch1" value="Search for a Car" onclick="CarSearch()" id="BtnQuickSearch1" title="Search Used Car Showroom" class="btn btn-success" style="width:100%;">
-            <div class="margintop-20 marginleft-5 hidden"> Vehicles Sold!</div>
-        </div>
-    </div>
+<div class="col-12">
+    <img src="https://wallpapercave.com/wp/wp3720759.jpg" width="100%" height="500px" />
 </div>
-
-<div>
-    <div class="col-12">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
-    </div>
-</div>
-
-@*<div class="container">
-    <div class="row">
-        <div class="col-6">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-12" style="border:2px solid black">
-                    <div style="text-align: center; border-bottom: 2px solid black">
-                        <h3>@item.ModelCode</h3>
-                    </div>
-                    <div>
-                        <div class="col-md-8">
-                            <img src="C:\Users\Loyd.Mabulana\source\repos\test\wwwroot\Pictures\Toyota_Corolla.jpg" width="150px" height="150px" />
-                        </div>
-                        <div class="col-md-4" style="text-align: left;">
-                            <b>@item.CarDescription</b>
-                        </div>
-                    </div>
-
-                    <div class="col-md-8" style="font-size:18px;  border-top: 2px solid black;padding:2px">
-                        <b>@item.Price</b>
-                    </div>
-
-                    <div class="col-md-4" style="text-align: left; margin-bottom: 10px; border-top: 2px solid black;padding:2px">
-                        <input type="button" value="Add to Cart" onclick="AddToCart('@item.CarCode',true)" />|
-                        <a class="btn btn-warning" asp-controller="Cars" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
-                    </div>
-                </div>
-
-                <br />
-                <br />
-            }
-        </div>
-    </div>
-
-
-</div>*@

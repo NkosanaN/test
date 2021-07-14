@@ -1,5 +1,6 @@
 ﻿@model MovieApiV.Model.Part
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 @{
     ViewData["Title"] = "Details";
 
@@ -15,61 +16,69 @@
 
 <div>
     <div class="col-6">
-        <img src="@imgSrc" height="300" width="400"  />
+        <img src="@imgSrc" height="300" width="400" />
     </div>
 </div>
 <div>
     <h4>Part</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PartCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PartCode)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PartName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PartName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Manufacture)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Manufacture)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Year)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Year)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Model)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Model)
         </dd>
     </dl>
 </div>
 <div>
-    <input type="button" class="btn btn-outline-info" value="Add to Cart" onclick="AddToCart('@Model.PartCode', true)" />
-    <a asp-action="Index" asp-controller="Home">Back to List</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="parts" asp-controller="admin">Parts Available</a>
+    }
+    else
+    {
+        <input type="button" class="btn btn-outline-info" value="Add to Cart" onclick="AddToCart('@Model.PartCode', false)" />
+        <a asp-action="index" asp-controller="parts">Back to List</a>
+    }
+
+
 </div>
 
 
 <script>
 
     function AddToCart(id, car) {
-        debugger;
         $.ajax({
             url: '/cart/create',
             method: 'POST',

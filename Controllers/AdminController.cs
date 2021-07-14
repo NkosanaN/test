@@ -142,6 +142,16 @@ namespace MovieApiV2Web1.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> Parts()
+        {
+            var parts = await dataHandler.PartListGet();
+            return View(parts);
+        }
 
+        public async Task<IActionResult> Cars()
+        {
+            var cars = await dataHandler.CarListGet();
+            return View(cars);
+        }
     }
 }

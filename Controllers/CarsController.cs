@@ -55,29 +55,33 @@ namespace MovieApiV2Web1.Controllers
         // POST: CarsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Car model1, IFormFile Car)
+        public async Task<ActionResult> Create(Car model1)
         {
             try
             {
-                if (model1.Image.Length > 48000)
+                if (model1.Image != null)
                 {
-                    ModelState.AddModelError("ImagePicture", "The file is too large, 48kb maximum");
-                }
-                if (!validImageTypes.Contains(model1.Image.ContentType))
-                {
-                    ModelState.AddModelError("ImagePicture", "Invalid file type, please upload jpg or png files only");
-                }
-                using (var memoryStream = new MemoryStream())
-                {
-                    await model1.Image.CopyToAsync(memoryStream);
+                    if (model1.Image.Length > 48000)
+                    {
+                        ModelState.AddModelError("ImagePicture", "The file is too large, 48kb maximum");
+                    }
+                    if (!validImageTypes.Contains(model1.Image.ContentType))
+                    {
+                        ModelState.AddModelError("ImagePicture", "Invalid file type, please upload jpg or png files only");
+                    }
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await model1.Image.CopyToAsync(memoryStream);
 
-                    model1.ImagePicture = memoryStream.ToArray();
+                        model1.ImagePicture = memoryStream.ToArray();
+                    }
+                    model1.ImagePath = Path.GetFileName(model1.Image.FileName);
                 }
-                model1.ImagePath = Path.GetFileName(model1.Image.FileName);
-                var r = await dataHandler.CarAddUpdate(model1, 4);
-                if(r)
+
+                var updated = await dataHandler.CarAddUpdate(model1, 5);
+                if(updated)
                 {
-                    return RedirectToAction("index", "admin");
+                    return RedirectToAction("cars", "admin");
                 }
                 return View("Error");
             }
@@ -87,47 +91,57 @@ namespace MovieApiV2Web1.Controllers
             }
         }
 
-        private byte[] GetByteArrayFromImage(IFormFile file)
-        {
-            using (var target = new MemoryStream())
-            {
-                file.CopyTo(target);
-                return target.ToArray();
-            }
-        }
 
         // GET: CarsController/Edit/5
         public async Task<ActionResult> Edit(string code)
         {
-            var r = await dataHandler.CarGetSingle(code);
-            return View(r);
+            var car = await dataHandler.CarGetSingle(code);
+            return View(car);
         }
 
         // POST: CarsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Car model)
+        public async Task<ActionResult> Edit(Car model1)
         {
             try
             {
-                var r = await dataHandler.CarAddUpdate(model, 5);
-                if (r)
+                if (model1.Image != null)
                 {
-                    return RedirectToAction(nameof(Index));
+                    if (model1.Image.Length > 48000)
+                    {
+                        ModelState.AddModelError("ImagePicture", "The file is too large, 48kb maximum");
+                    }
+                    if (!validImageTypes.Contains(model1.Image.ContentType))
+                    {
+                        ModelState.AddModelError("ImagePicture", "Invalid file type, please upload jpg or png files only");
+                    }
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await model1.Image.CopyToAsync(memoryStream);
+
+                        model1.ImagePicture = memoryStream.ToArray();
+                    }
+                    model1.ImagePath = Path.GetFileName(model1.Image.FileName);
                 }
-                return View();
+                var edited = await dataHandler.CarAddUpdate(model1, 5);
+                if (edited)
+                {
+                    return RedirectToAction("cars", "admin");
+                }
+                return View(model1);
             }
             catch
             {
-                return View();
+                return View(model1);
             }
         }
 
         // GET: CarsController/Delete/5
         public async Task<IActionResult> Delete(string code)
         {
-            var r = await dataHandler.CarGetSingle(code);
-            return View(r);
+            var car = await dataHandler.CarGetSingle(code);
+            return View(car);
         }
 
         // POST: CarsController/Delete/5
@@ -137,10 +151,10 @@ namespace MovieApiV2Web1.Controllers
         {
             try
             {
-                var r = await dataHandler.CarDelete(model.CarCode);
-                if (r)
+                var delete = await dataHandler.CarDelete(model.CarCode);
+                if (delete)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("cars", "admin");
                 }
                 return View();
             }
@@ -160,20 +174,30 @@ namespace MovieApiV2Web1.Controllers
         {
             try
             {
-                var r = await dataHandler.AddBooking(model);
-                if (r)
+                var booked = await dataHandler.AddBooking(model);
+                if (booked)
                 {
-                    return View("success");
+                    return View("_BookingSuccess");
                 }
                 return View();
             }
-            catch (Exception)
+            catch 
             {
-
-                throw;
+                return View("error");
             }
 
-            return View();
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> DeleteImage(string id)
+        {
+            var delete = await dataHandler.DeleteCarPicture(id);
+            if (delete)
+            {
+                return Ok(new { success = true });
+            }
+            return Ok(new { success = false });
         }
     }
 }

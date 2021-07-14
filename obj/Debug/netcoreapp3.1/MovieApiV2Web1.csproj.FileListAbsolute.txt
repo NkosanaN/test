@@ -434,7 +434,6 @@ C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Car
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Details.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Edit.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cars\Index.cshtml.g.cs
-C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cart\CheckOut.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Create.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cart\CustomerPayment.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
@@ -466,3 +465,6 @@ C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Car
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\success.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\StockEdit.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\bookingsuccess.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Parts.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Cars.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BookingSuccess.cshtml.g.cs

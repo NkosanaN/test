@@ -16,10 +16,18 @@
             </form>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin</a>
-        </li>
-        <partial name="_ShoppingCart" />
+
+        @if (User.IsInRole("User"))
+        {
+            <partial name="_ShoppingCart" />
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Admin" asp-action="Index">Admin</a>
+            </li>
+        }
 
     }
     else

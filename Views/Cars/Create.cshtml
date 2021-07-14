@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CarCode" class="control-label"></label>
@@ -62,7 +62,7 @@
                 <input asp-for="ModelCode" class="form-control" />
                 <span asp-validation-for="ModelCode" class="text-danger"></span>
             </div>
-          
+
 
             <div class="form-group">
                 <label asp-for="ImagePicture" class="control-label">Upload Car Picture</label>
@@ -74,7 +74,7 @@
 
             <div class="form-group">
                 <button type="submit" id="btnPost" class="btn btn-dark">Create</button>&nbsp;
-                <a asp-action="Index" asp-controller="admin">Back to List</a>
+                <a asp-action="cars" asp-controller="admin">Back to List</a>
             </div>
         </form>
     </div>

@@ -82,7 +82,7 @@ namespace MovieApiV2Web1.Controllers
                     }
                     else if (role.Equals("User"))
                     {
-                        return RedirectToAction("UserActionName", "UserControllerName");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {

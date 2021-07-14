@@ -2,75 +2,85 @@
 
 @{
     ViewData["Title"] = "Details";
-}
 
+    string imgSrc = "";
+    if (Model.ImagePicture != null)
+    {
+        var base64 = Convert.ToBase64String(Model.ImagePicture);
+        imgSrc = String.Format("data:image;base64,{0}", base64);
+    }
+}
 <h1>Details</h1>
 <div>
     <div class="col-6">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvsC9tYFzZRotE5cfTi2-YQZNEn1u6TYRVQ3Spf_Tc4u77OvklJTxEMVEqb7YovPTYD4&usqp=CAU" width="150px" height="150px" />
+        <img src="@imgSrc" height="300" width="400" />
     </div>
 </div>
 <div class="container">
     <h4>Car</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CarCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarCode)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ModelCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ModelCode)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Color)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Color)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Mileage)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Mileage)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ReqistationYear)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ReqistationYear)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CatCode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CatCode)
         </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagePicture)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagePicture)
-        </dd>*@
     </dl>
+    @if (!User.IsInRole("Admin"))
+    {
+        <a class="btn btn-warning" asp-controller="Cars" asp-route-carname="@Model.ModelCode" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
 
-    <a class="btn btn-warning" asp-controller="Cars" asp-route-carname="@Model.ModelCode" asp-action="BookToDriver"><em>Book Your Test Drive Today</em></a>
-<p/>
+    }
+    <p />
 
-<div>
-    <input type="button" value="Add to Cart" class="btn btn-outline-info"  onclick="AddToCart('@Model.CarCode',true)" />
-    <a asp-action="Index" asp-controller="Home">Back to List</a>
-</div>
+    <div>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="cars" asp-controller="admin">Cars Availble</a>
+        }
+        else
+        {
+            <input type="button" value="Add to Cart" class="btn btn-outline-info" onclick="AddToCart('@Model.CarCode',true)" />
+            <a asp-action="index" asp-controller="home">Back to List</a>
+        }
+    </div>
 
 </div>
 

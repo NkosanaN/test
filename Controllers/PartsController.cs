@@ -36,8 +36,8 @@ namespace MovieApiV2Web1.Controllers
         // GET: PartsController
         public async Task<IActionResult> Index()
         {
-            var r = await dataHandler.PartListGet();
-            return View(r);
+            var list = await dataHandler.PartListGet();
+            return View(list);
         }
 
         // GET: PartsController/Details/5
@@ -51,8 +51,8 @@ namespace MovieApiV2Web1.Controllers
         // GET: PartsController/Create
         public ActionResult Create()
         {
-            var m = new Part { Year = DateTime.Now };
-            return View(m);
+            var model = new Part { Year = DateTime.Now };
+            return View(model);
         }
 
         // POST: PartsController/Create
@@ -80,31 +80,23 @@ namespace MovieApiV2Web1.Controllers
                         model1.ImagePicture = memoryStream.ToArray();
                     }
                     model1.ImagePath = Path.GetFileName(model1.Image.FileName);
+                }
 
-                    if (ModelState.IsValid)
+                if (ModelState.IsValid)
+                {
+                    var r = await dataHandler.PartAddUpdate(model1, 4);
+                    if (r)
                     {
-                        var r = await dataHandler.PartAddUpdate(model1, 4);
-                        if (r)
-                        {
-                            return RedirectToAction("index", "admin");
-                        }
-                        return View("Error");
+                        return RedirectToAction("index", "admin");
                     }
+                    return View("Error");
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return View("Error");
             }
             return View(model1);
-        }
-        private byte[] GetByteArrayFromImage(IFormFile file)
-        {
-            using (var target = new MemoryStream())
-            {
-                file.CopyTo(target);
-                return target.ToArray();
-            }
         }
 
         // GET: PartsController/Edit/5
@@ -140,16 +132,16 @@ namespace MovieApiV2Web1.Controllers
                         model1.ImagePicture = memoryStream.ToArray();
                     }
                     model1.ImagePath = Path.GetFileName(model1.Image.FileName);
+                }
 
-                    if (ModelState.IsValid)
+                if (ModelState.IsValid)
+                {
+                    var r = await dataHandler.PartAddUpdate(model1, 5);
+                    if (r)
                     {
-                        var r = await dataHandler.PartAddUpdate(model1, 4);
-                        if (r)
-                        {
-                            return RedirectToAction("index", "admin");
-                        }
-                        return View("Error");
+                        return RedirectToAction("parts", "admin");
                     }
+                    return View("Error");
                 }
             }
             catch
@@ -160,24 +152,43 @@ namespace MovieApiV2Web1.Controllers
         }
 
         // GET: PartsController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            var data = await dataHandler.PartListGet();
+            var model = data.FirstOrDefault(p => p.PartCode == id);
+            return View(model);
         }
 
         // POST: PartsController/Delete/5
         [HttpPost]
 
-        public ActionResult Delete(int id, string collection)
+        public async Task<IActionResult> Delete(Part model1)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var delete = await dataHandler.PartDelete(model1.PartCode);
+                if (delete)
+                {
+                    return RedirectToAction("parts", "admin");
+                }
+                return View("Error");
             }
             catch
             {
-                return View();
+                return View(model1);
             }
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> DeleteImage(string id)
+        {
+            var delete = await dataHandler.DeletePicture(id);
+            if (delete)
+            {
+                return Ok(new { success = true });
+            }
+            return Ok(new { success = false });
         }
     }
 }

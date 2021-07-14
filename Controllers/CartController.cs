@@ -21,8 +21,29 @@ namespace MovieApiV2Web1.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var r = await dataHandler.CartGetList();
-            return View(r);
+            var cars = await dataHandler.CarListGet();
+            var parts = await dataHandler.PartListGet();
+            var carts = await dataHandler.CartGetList();
+
+            foreach (var cart in carts)
+            {
+                foreach (var car in cars)
+                {
+                    if(car.CarCode == cart.ItemCode)
+                    {
+                        cart.ImagePicture = car.ImagePicture;
+                    }
+                }
+
+                foreach (var part in parts)
+                {
+                    if (part.PartCode == cart.ItemCode)
+                    {
+                        cart.ImagePicture = part.ImagePicture;
+                    }
+                }
+            }
+            return View(carts);
         }
 
         
@@ -88,31 +109,6 @@ namespace MovieApiV2Web1.Controllers
         }
 
 
-        public ActionResult CheckOut(string id)
-        {
-            try
-            {
-                var model = new CheckOut{ CarCode = id,DateSold=DateTime.Now,MonthlyPaymentDate = DateTime.Now };
-                return View(model);
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CheckOut(CheckOut model)
-        {
-            model.DateSold = DateTime.Now;
-            model.MonthlyPaymentDate = DateTime.Now;
-            var checkout = await dataHandler.CheckOut(model);
-            if (checkout)
-            {
-                return RedirectToAction("index", "Home", new { code = model.CarSoldCode });
-            }
-            return View(model);
-        }
         public async Task<IActionResult> CustomerPayment(string code)
         {
             var model = new Payments { CarSoldCode = code, PaymentDateDue = DateTime.Now}; ;

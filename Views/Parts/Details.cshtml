@@ -12,7 +12,7 @@
     }
 }
 
-<h1>Details</h1>
+<h1>Part Details</h1>
 
 <div>
     <div class="col-6">
@@ -20,9 +20,8 @@
     </div>
 </div>
 <div>
-    <h4>Part</h4>
     <hr />
-    <dl class="row">
+    <dl class="row col-md-12">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PartCode)
         </dt>
@@ -68,7 +67,14 @@
     }
     else
     {
+        @*
         <input type="button" class="btn btn-outline-info" value="Add to Cart" onclick="AddToCart('@Model.PartCode', false)" />
+            *@
+<button type="submit" class="btn btn-outline-info" onclick="AddToCart('@Model.PartCode', false)">
+    <i class="fas fa-shopping-cart"></i> Add to Cart
+</button>
+
+
         <a asp-action="index" asp-controller="parts">Back to List</a>
     }
 

@@ -19,10 +19,11 @@
     </div>
 </div>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="container col-md-12" >
         <form asp-action="Edit" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+
+            <div class="col-md-8">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CarCode" class="control-label"></label>
@@ -39,6 +40,10 @@
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
+        </div>
+
+            <div class="col-md-8">
+
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
                 <input asp-for="Color" class="form-control" />
@@ -74,6 +79,10 @@
                 <input asp-for="ModelCode" class="form-control" />
                 <span asp-validation-for="ModelCode" class="text-danger"></span>
             </div>
+
+        </div>
+
+            
             <div class="form-group">
                 <label asp-for="ImagePicture" class="control-label">Upload Part</label>
                 <div>
@@ -81,13 +90,19 @@
                     <span asp-validation-for="Image" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="form-group">
-                <button type="submit" id="btnPost" class="btn btn-dark">Save</button>&nbsp;
-                <input type="button" value="Delete Image" class="btn btn-danger" onclick="Delete('@Model.CarCode')" />
+                <button type="submit" id="btnPost" class="btn btn-primary">Save</button>&nbsp;
+                @*<input type="button" value="Delete Image" class="btn btn-danger" onclick="Delete('@Model.CarCode')" />*@
+
+                <button type="submit" class="btn btn-outline-danger"  onclick="Delete('@Model.CarCode')">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+
                 <a asp-action="cars" asp-controller="admin">Back to List</a>
             </div>
         </form>
-    </div>
+    
 </div>
 
 

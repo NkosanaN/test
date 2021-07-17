@@ -4,7 +4,7 @@
 <div>
     <h4>Bookings</h4>
     <hr />
-    <dl class="row">
+    <dl class="row col-md-12">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CustomerId)
         </dt>
@@ -39,7 +39,11 @@
     
     <form asp-action="Delete">
         <input asp-for="CustomerId" hidden />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        @*<button type="submit" class="btn btn-danger"><i class="fas fa-trash-o"></i>Delete</button>*@
+
+        <button type="submit" class="btn btn-outline-danger">
+            <i class="fas fa-trash-alt"></i> Delete
+        </button>
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

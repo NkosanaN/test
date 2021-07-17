@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -71,7 +72,13 @@ namespace MovieApiV2Web1
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             */
-
+            services.AddNotyf( config =>
+                {
+                    config.DurationInSeconds = 100;
+                    config.IsDismissable = true;
+                    config.Position = NotyfPosition.TopRight;
+                    
+                    });
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddTransient<DataHandler, DataHandler>();

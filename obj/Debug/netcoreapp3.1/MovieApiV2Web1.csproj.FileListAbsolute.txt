@@ -468,3 +468,7 @@ C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Sha
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Parts.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Cars.cshtml.g.cs
 C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BookingSuccess.cshtml.g.cs
+C:\Users\Loyd.Mabulana\source\repos\test\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\Loyd.Mabulana\source\repos\test\bin\Debug\netcoreapp3.1\AspNetCoreHero.ToastNotification.Views.dll
+C:\Users\Loyd.Mabulana\source\repos\test\bin\Debug\netcoreapp3.1\AspNetCoreHero.ToastNotification.dll
+C:\Users\Loyd.Mabulana\source\repos\test\obj\Debug\netcoreapp3.1\Razor\Views\Cart\CreditCardPayment.cshtml.g.cs

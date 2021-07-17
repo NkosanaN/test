@@ -62,9 +62,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" id="btnPost" class="btn btn-dark">Save</button>&nbsp;
-                <input type="button" value="Delete Image" class="btn btn-danger" onclick="Delete('@Model.PartCode')" />
-            
+                <button type="submit" id="btnPost" class="btn btn-primary">Save</button>&nbsp;
+                @*<input type="button" value="Delete Image" class="btn btn-danger" onclick="Delete('@Model.PartCode')" />*@
+
+                <button type="submit" class="btn btn-outline-danger" onclick="Delete('@Model.PartCode')">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+
                 <a asp-action="parts" asp-controller="admin">Back to List</a>
             </div>
         </form>

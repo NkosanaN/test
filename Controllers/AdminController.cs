@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,17 @@ namespace MovieApiV2Web1.Controllers
      * View Test Driving Bookings 
      * Create Role(s)
      */
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         //private readonly DataHandler dataHandler;
         private readonly DataHandler dataHandler;
-        public AdminController(RoleManager<IdentityRole> roleManager, DataHandler handler) 
+        private readonly INotyfService _notyf;
+        public AdminController(RoleManager<IdentityRole> roleManager, DataHandler handler,INotyfService notyf) 
         {
             _roleManager = roleManager;
+            _notyf = notyf;
             dataHandler = handler;
         }
         // GET: AdminController
@@ -32,6 +35,7 @@ namespace MovieApiV2Web1.Controllers
         {
             var model = await dataHandler.BookingListGet();
             var smodel = await dataHandler.StockListGet();
+            _notyf.Success("Success Notication");
             return View((model,smodel));
         }
 

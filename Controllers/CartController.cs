@@ -152,5 +152,22 @@ namespace MovieApiV2Web1.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> CreditCardPayment(decimal amount,string item, string name)
+        {
+            ViewBag.Amount = amount;
+            return View((amount, item,name));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreditCardPayment(string item)
+        {
+            var r = await dataHandler.CartDelete(item);
+            if (r)
+            {
+                return View("success");
+            }
+            return View();
+        }
     }
 }

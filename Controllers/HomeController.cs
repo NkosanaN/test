@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,8 @@ using System.Threading.Tasks;
 
 namespace MovieApiV2Web1.Controllers
 {
+    [Authorize(Roles = "User")]
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

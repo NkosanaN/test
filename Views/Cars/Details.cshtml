@@ -77,7 +77,13 @@
         }
         else
         {
-            <input type="button" value="Add to Cart" class="btn btn-outline-info" onclick="AddToCart('@Model.CarCode',true)" />
+            @*<input type="button" value="Add to Cart" class="btn btn-outline-info" onclick="AddToCart('@Model.CarCode',true)" />*@
+
+
+            <button type="submit" class="btn btn-outline-info" onclick="AddToCart('@Model.CarCode', true)">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+
             <a asp-action="index" asp-controller="home">Back to List</a>
         }
     </div>
